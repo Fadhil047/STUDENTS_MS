@@ -1,4 +1,32 @@
-service: () -> {
-    getMessage: () -> (text) query;
-    setMessage: (text) -> ();
+type Student = record {
+  id : text;
+  name : text;
+  createdAt : nat64;
+  updatedAt : opt nat64;
+  dateAdmission : text;
+  dateBirth : text;
+  course : text;
+  courseType : text;
+  location : text;
+  parent : text;
+};
+type StudentPayload = record {
+  name : text;
+  dateAdmission : text;
+  dateBirth : text;
+  parentNumber : nat64;
+  course : text;
+  courseType : text;
+  location : text;
+  parent : text;
+};
+type _AzleResult = variant { Ok : Student; Err : text };
+type _AzleResult_1 = variant { Ok : vec Student; Err : text };
+service : () -> {
+  createStudent : (StudentPayload) -> (_AzleResult);
+  deleteStudent : (text) -> (_AzleResult);
+  getAllStudents : () -> (_AzleResult_1) query;
+  getStudentById : (text) -> (_AzleResult) query;
+  getStudentByName : (text) -> (_AzleResult) query;
+  updateStudent : (text, StudentPayload) -> (_AzleResult);
 }
